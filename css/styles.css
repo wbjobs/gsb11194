@@ -1,0 +1,186 @@
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #f4f6f8;
+  color: #222;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  background: #1f2937;
+  color: #fff;
+}
+.topbar h1 { font-size: 18px; margin: 0; }
+.topbar-actions button { margin-left: 8px; }
+
+.layout {
+  flex: 1;
+  display: flex;
+  gap: 24px;
+  padding: 24px;
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.sidebar { width: 240px; flex-shrink: 0; }
+.sidebar h2 { font-size: 15px; margin: 0 0 12px; }
+.step-list { list-style: none; margin: 0; padding: 0; }
+.step-item {
+  padding: 10px 12px;
+  margin-bottom: 6px;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.step-item.current { border-color: #2563eb; box-shadow: 0 0 0 1px #2563eb; }
+.step-item.done { background: #ecfdf5; border-color: #a7f3d0; }
+.step-item.done::after { content: " ✓"; color: #059669; }
+.step-item.hidden-step {
+  opacity: 0.45;
+  background: #f1f5f9;
+  border-style: dashed;
+  cursor: not-allowed;
+}
+.hint { font-size: 12px; color: #64748b; }
+
+.content {
+  flex: 1;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 24px;
+}
+.content h2 { margin-top: 0; font-size: 17px; }
+
+.field { margin-bottom: 18px; }
+.field-label { display: block; font-size: 14px; margin-bottom: 6px; font-weight: 600; }
+.field input[type="text"],
+.field input[type="number"],
+.field textarea {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 14px;
+}
+.field textarea { min-height: 72px; }
+.radio-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.nav-bar { display: flex; gap: 12px; margin-top: 8px; }
+
+button {
+  padding: 8px 18px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background: #fff;
+  font-size: 14px;
+  cursor: pointer;
+}
+button:hover:not(:disabled) { background: #f1f5f9; }
+button:disabled { opacity: 0.4; cursor: not-allowed; }
+#btn-next, #btn-submit { background: #2563eb; border-color: #2563eb; color: #fff; }
+#btn-next:hover, #btn-submit:hover { background: #1d4ed8; }
+
+.submitted-box, .share-box, .import-box {
+  margin-top: 24px;
+  padding: 16px;
+  border-radius: 8px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+.submitted-box h3, .share-box h3, .import-box h3 { margin: 0 0 8px; font-size: 14px; }
+.submitted-box pre { margin: 0; font-size: 13px; }
+.share-box input { width: 100%; padding: 6px; font-size: 12px; }
+.import-box textarea { width: 100%; font-size: 12px; margin-bottom: 8px; }
+
+.statusbar {
+  padding: 8px 24px;
+  font-size: 12px;
+  color: #64748b;
+  background: #fff;
+  border-top: 1px solid #e2e8f0;
+}
+
+.toast {
+  position: fixed;
+  bottom: 48px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  border-radius: 8px;
+  background: #334155;
+  color: #fff;
+  font-size: 14px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s;
+}
+.toast.show { opacity: 1; }
+.toast.error { background: #b91c1c; }
+.toast.ok { background: #047857; }
+
+.replay-panel {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+.replay-inner {
+  width: min(860px, 92vw);
+  max-height: 84vh;
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.replay-header { display: flex; justify-content: space-between; align-items: center; }
+.replay-header h2 { margin: 0; font-size: 16px; }
+.replay-body { display: flex; gap: 16px; margin-top: 12px; overflow: hidden; }
+.replay-list {
+  width: 300px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  font-size: 13px;
+}
+.replay-list li {
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  border-bottom: 1px solid #f1f5f9;
+}
+.replay-list li:hover { background: #f1f5f9; }
+.replay-list li.active { background: #dbeafe; }
+.replay-detail {
+  flex: 1;
+  margin: 0;
+  padding: 12px;
+  background: #0f172a;
+  color: #a5f3fc;
+  border-radius: 8px;
+  font-size: 12px;
+  overflow: auto;
+  max-height: 60vh;
+}
