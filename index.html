@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5 步分支表单向导</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <h1>5 步分支表单向导</h1>
+      <p class="subtitle">IndexedDB 草稿 · Web Worker 状态计算 · 分支 / 合并 / 回放</p>
+    </header>
+
+    <nav id="stepper" class="stepper" aria-label="步骤导航"></nav>
+
+    <main class="card">
+      <div class="card-head">
+        <h2 id="step-title"></h2>
+        <span id="draft-status" class="draft-status" title="草稿保存状态"></span>
+      </div>
+      <div id="summary" class="summary" hidden></div>
+      <form id="step-form" novalidate></form>
+      <div id="form-error" class="form-error" role="alert" hidden></div>
+      <div class="nav-buttons">
+        <button id="btn-prev" type="button" class="btn btn-secondary">← 上一步</button>
+        <button id="btn-next" type="button" class="btn btn-primary">下一步 →</button>
+      </div>
+    </main>
+
+    <section class="toolbar card">
+      <button id="btn-export" type="button" class="btn btn-secondary">导出 / 分享草稿</button>
+      <button id="btn-import" type="button" class="btn btn-secondary">导入草稿</button>
+      <button id="btn-replay" type="button" class="btn btn-secondary">状态回放</button>
+      <button id="btn-reset" type="button" class="btn btn-danger">重置表单</button>
+    </section>
+
+    <section id="replay-panel" class="card replay-panel" hidden>
+      <div class="card-head">
+        <h2>状态回放</h2>
+        <div>
+          <button id="btn-play" type="button" class="btn btn-secondary btn-sm">▶ 自动播放</button>
+          <button id="btn-replay-close" type="button" class="btn btn-secondary btn-sm">关闭</button>
+        </div>
+      </div>
+      <p class="hint">点击任意事件，查看该时刻由事件日志重建的状态快照。</p>
+      <div class="replay-body">
+        <ol id="replay-list" class="replay-list"></ol>
+        <pre id="replay-snapshot" class="replay-snapshot">（选择左侧事件）</pre>
+      </div>
+    </section>
+
+    <dialog id="share-dialog" class="dialog">
+      <h3 id="share-title">草稿</h3>
+      <p class="hint" id="share-hint"></p>
+      <textarea id="share-text" rows="8" spellcheck="false"></textarea>
+      <div class="dialog-actions">
+        <button id="btn-copy-link" type="button" class="btn btn-secondary btn-sm">复制分享链接</button>
+        <button id="btn-download" type="button" class="btn btn-secondary btn-sm">下载 JSON</button>
+        <button id="btn-share-ok" type="button" class="btn btn-primary btn-sm">确定</button>
+      </div>
+    </dialog>
+
+    <div id="toast" class="toast" hidden></div>
+  </div>
+
+  <script src="js/wizard-core.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
